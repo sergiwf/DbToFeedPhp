@@ -36,7 +36,7 @@ databaseName=test
 user=test
 password=test
 select=select * from test_table
-output=output.out
+output=default
 
 ```
 
@@ -49,7 +49,7 @@ databaseName=test
 user=test
 password=test
 select=select * from test_table
-output=output.out
+output=default
 
 ```
 
