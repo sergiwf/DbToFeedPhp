@@ -16,7 +16,7 @@ class CREATE_CSV {
         }
 
         $this->increase = 0;
-        $this->increase_limit = 500;
+        $this->increase_limit = LIMIT;
     } 
    
     function __destruct() { 
@@ -38,15 +38,11 @@ class CREATE_CSV {
             fputcsv($this->fp, $row);
 
             $this->increase++;
-            
-            if( $this->increase == LIMIT) {
-                break;
-            }
-
+        
             if ($this->increase == $this->increase_limit){
 
                 $db->add_limit($this->increase);
-                $this->increase_limit = $this->increase + 500;
+                $this->increase_limit = $this->increase + LIMIT;
 
                 $add_query = $db->query_mysql(QUERY);
                 $csv->create_body_mysql($add_query, $db, $csv);
@@ -72,14 +68,10 @@ class CREATE_CSV {
 
             $this->increase++;
             
-            if( $this->increase == LIMIT) {
-                break;
-            }
-
             if ($this->increase == $this->increase_limit){
 
                 $db->add_limit($this->increase);
-                $this->increase_limit = $this->increase + 500;
+                $this->increase_limit = $this->increase + LIMIT;
 
                 $add_query = $db->query_postgres(QUERY);
                 $csv->create_body_postgres($add_query, $db, $csv);
