@@ -13,7 +13,7 @@ El ejecutable ha de recibir un archivo properties.ini con los siguientes paramet
 
 * Tipo y datos de acceso a la base de datos
 * Sentencia SQL para generar los datos.
-* Archivo de salida de datos.
+* Carpeta de salida de datos.
 
 Actualmente soporta las siguientes bases de datos:
 
