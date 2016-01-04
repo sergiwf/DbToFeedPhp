@@ -43,10 +43,10 @@ class CREATE_CSV {
                 break;
             }
 
-            if ($this->increase == $this->icremental_limit){
+            if ($this->increase == $this->increase_limit){
 
                 $db->add_limit($this->increase);
-                $this->icremental_limit = $this->increase + 500;
+                $this->increase_limit = $this->increase + 500;
 
                 $add_query = $db->query_mysql(QUERY);
                 $csv->create_body_mysql($add_query, $db, $csv);
@@ -76,10 +76,10 @@ class CREATE_CSV {
                 break;
             }
 
-            if ($this->increase == $this->icremental_limit){
+            if ($this->increase == $this->increase_limit){
 
                 $db->add_limit($this->increase);
-                $this->icremental_limit = $this->increase + 500;
+                $this->increase_limit = $this->increase + 500;
 
                 $add_query = $db->query_postgres(QUERY);
                 $csv->create_body_postgres($add_query, $db, $csv);
