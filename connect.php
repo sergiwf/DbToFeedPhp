@@ -6,16 +6,8 @@ class DB_CONNECT {
 
     function __construct() { 
 
-        if( LIMIT == 'default' ){
-               
-            $this->limit = " limit 0,500";
-
-        } else {
-
-            $this->limit = " limit 0," . LIMIT;
+        $this->limit = " limit 0," . LIMIT;
     
-        }
-        
     } 
    
     function __destruct() { 
