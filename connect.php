@@ -6,7 +6,7 @@ class DB_CONNECT {
 
     function __construct() { 
 
-        if( LIMIT == 'default' || LIMIT > 500 ){
+        if( LIMIT == 'default' ){
                
             $this->limit = " limit 0,500";
 
@@ -24,7 +24,7 @@ class DB_CONNECT {
 
     public function add_limit($addlimit) { 
             
-        $this->limit = " limit " . $addlimit .",500";
+        $this->limit = " limit " . $addlimit . "," . LIMIT;
     
     } 
    
@@ -55,7 +55,7 @@ class DB_CONNECT {
         $this->conexion =  pg_connect($conn_string) or die("No se pudo conectar");
     } 
 
-     public function query_postgres($query) { 
+    public function query_postgres($query) { 
             
         $data_query = pg_execute($this->conexion, "my_query", $query . $this->limit);
 
