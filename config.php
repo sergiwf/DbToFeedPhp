@@ -4,7 +4,7 @@ $properties = parse_ini_file("properties.ini");
 
 if (empty($properties['limit'])) {
 	
-	$properties['limit'] = 'default';
+	$properties['limit'] = 500;
 }
 
 define("DB_HOST", $properties['databaseServer']); 
