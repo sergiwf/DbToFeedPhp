@@ -32,24 +32,26 @@ class CREATE_CSV {
             mysql_data_seek($dataBd, 0);
     } 
      
-    public function create_body_mysql($dataBd, $db, $csv) { 
+    public function create_body_mysql($dataBd, $db) { 
         while($row = mysql_fetch_assoc($dataBd)) {
 
             fputcsv($this->fp, $row);
 
             $this->increase++;
-        
+       
             if ($this->increase == $this->increase_limit){
 
                 $db->add_limit($this->increase);
                 $this->increase_limit = $this->increase + LIMIT;
 
                 $add_query = $db->query_mysql(QUERY);
-                $csv->create_body_mysql($add_query, $db, $csv);
+                $this->create_body_mysql($add_query, $db);
+
+                return;
             }
         }
         
-        fclose($this->fp);
+        $this->close_fp();
     }
     
     public function create_header_postgres($dataBd) { 
@@ -61,7 +63,7 @@ class CREATE_CSV {
             pg_result_seek($dataBd, 0);
     } 
      
-    public function create_body_postgres($dataBd, $db, $csv) { 
+    public function create_body_postgres($dataBd, $db) { 
         while($row = pg_fetch_assoc($dataBd)) {
 
             fputcsv($this->fp, $row);
@@ -74,11 +76,20 @@ class CREATE_CSV {
                 $this->increase_limit = $this->increase + LIMIT;
 
                 $add_query = $db->query_postgres(QUERY);
-                $csv->create_body_postgres($add_query, $db, $csv);
+                $this->create_body_postgres($add_query, $db);
+
+                return;
             }
         }
         
+        $this->close_fp();
+    } 
+
+    public function close_fp() { 
+            
         fclose($this->fp);
+
+        echo "Download complete, $this->increase file affected.";
     } 
 } 
 

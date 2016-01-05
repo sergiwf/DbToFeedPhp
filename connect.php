@@ -1,13 +1,11 @@
 <?php 
 class DB_CONNECT { 
     private $conexion;
-    private $dbconn;
     private $limit;
 
     function __construct() { 
 
-        $this->limit = " limit 0," . LIMIT;
-    
+        $this->limit = " LIMIT " . LIMIT;
     } 
    
     function __destruct() { 
@@ -16,14 +14,12 @@ class DB_CONNECT {
 
     public function add_limit($addlimit) { 
             
-        $this->limit = " limit " . $addlimit . "," . LIMIT;
-    
+        $this->limit = " LIMIT " . LIMIT . " OFFSET $addlimit"; 
     } 
    
     public function connect_mysql() { 
             
         $this->conexion = mysql_connect(DB_HOST, DB_USER, DB_PASSWORD,DB_PORT) or die('No se pudo conectar: ' . mysql_error()); 
-    
     } 
 
     public function query_mysql($query) { 
@@ -42,15 +38,15 @@ class DB_CONNECT {
     
     public function connect_postgres() { 
         
-        $conn_string = "host=DB_HOST port=DB_PORT dbname=DB_DATABASENAME user=DB_USER password=DB_PASSWORD";
+        $conn_string = "host=".DB_HOST . " port=" . DB_PORT ." dbname=" . DB_DATABASENAME . " user=" . DB_USER. " password=" .DB_PASSWORD;
 
-        $this->conexion =  pg_connect($conn_string) or die("No se pudo conectar");
+        $this->conexion = pg_connect($conn_string) or die("No se pudo conectar");
     } 
 
     public function query_postgres($query) { 
             
-        $data_query = pg_execute($this->conexion, "my_query", $query . $this->limit);
-
+        $data_query = pg_query($query . $this->limit) or die('La consulta fallo: ' . pg_last_error());
+       
         return $data_query; 
     } 
     

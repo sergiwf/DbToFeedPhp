@@ -20,7 +20,7 @@ if ( DB_DATABASE == 'postgres' ) {
 
     $csv->create_header_postgres($data_query);
     
-    $csv->create_body_postgres($data_query, $db, $csv);
+    $csv->create_body_postgres($data_query, $db);
     
     $db->close_postgres();
  
@@ -32,11 +32,9 @@ if ( DB_DATABASE == 'postgres' ) {
 
     $csv->create_header_mysql($data_query);
     
-    $csv->create_body_mysql($data_query, $db, $csv);
+    $csv->create_body_mysql($data_query, $db);
 
     $db->close_mysql();    
 }
-
-echo "Download complete";
 	
 ?>
