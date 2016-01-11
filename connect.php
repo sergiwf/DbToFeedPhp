@@ -38,7 +38,7 @@ class DB_CONNECT {
     
     public function connect_postgres() { 
         
-        $conn_string = "host=".DB_HOST . " port=" . DB_PORT ." dbname=" . DB_DATABASENAME . " user=" . DB_USER. " password=" .DB_PASSWORD;
+        $conn_string = "host=" . DB_HOST . " port=" . DB_PORT ." dbname=" . DB_DATABASENAME . " user=" . DB_USER . " password=" . DB_PASSWORD;
 
         $this->conexion = pg_connect($conn_string) or die("No se pudo conectar");
     } 
